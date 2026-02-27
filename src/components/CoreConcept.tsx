@@ -1,14 +1,11 @@
-interface CoreConceptProps {
-  image: string;
-  title: string;
-  description: string;
-}
-const CoreConcept = (props: CoreConceptProps) => {
+import type { CoreConceptType } from '../data/data';
+
+const CoreConcept = ({ title, description, image }: CoreConceptType) => {
   return (
     <li>
-      <img src={props.image} alt={props.title} />
-      <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
     </li>
   );
 };
