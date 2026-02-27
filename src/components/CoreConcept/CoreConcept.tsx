@@ -1,4 +1,5 @@
-import type { CoreConceptType } from '../data/data';
+import type { CoreConceptType } from '../../data/data';
+import './CoreConcept.css';
 
 const CoreConcept = ({ title, description, image }: CoreConceptType) => {
   return (

@@ -1,5 +1,5 @@
-import CoreConcept from './components/CoreConcept';
-import Header from './components/Header';
+import CoreConcept from './components/CoreConcept/CoreConcept';
+import Header from './components/Header/Header';
 import { CORE_CONCEPTS } from './data/data';
 
 function App() {
@@ -11,12 +11,7 @@ function App() {
           <h2>Core Concepts</h2>
           <ul>
             {CORE_CONCEPTS.map((concept) => (
-              <CoreConcept
-                key={concept.id}
-                title={concept.title}
-                description={concept.description}
-                image={concept.image}
-              />
+              <CoreConcept key={concept.id} {...concept} />
             ))}
           </ul>
         </section>
