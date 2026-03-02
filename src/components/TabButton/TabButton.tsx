@@ -1,14 +1,12 @@
 interface TabButtonProps {
   children: string;
+  onSelect: () => void;
 }
 
-const TabButton = ({ children }: TabButtonProps) => {
-  function handleClick() {
-    console.log('clicked');
-  }
+const TabButton = ({ children, onSelect }: TabButtonProps) => {
   return (
     <li>
-      <button onClick={handleClick}>{children}</button>
+      <button onClick={onSelect}>{children}</button>
     </li>
   );
 };
