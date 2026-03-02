@@ -3,9 +3,12 @@ interface TabButtonProps {
 }
 
 const TabButton = ({ children }: TabButtonProps) => {
+  function handleClick() {
+    console.log('clicked');
+  }
   return (
     <li>
-      <button>{children}</button>
+      <button onClick={handleClick}>{children}</button>
     </li>
   );
 };
