@@ -5,7 +5,7 @@ import TabButton from './components/TabButton/TabButton';
 import { CORE_CONCEPTS, EXAMPLES } from './data/data';
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState('components');
+  const [selectedTopic, setSelectedTopic] = useState('');
 
   function handleSelect(selectedButton: string) {
     setSelectedTopic(selectedButton);
@@ -56,11 +56,17 @@ function App() {
             </TabButton>
           </menu>
           <div id='tab-content'>
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
+            {!selectedTopic ? (
+              <p>Please select a topic</p>
+            ) : (
+              <>
+                <h3>{EXAMPLES[selectedTopic].title}</h3>
+                <p>{EXAMPLES[selectedTopic].description}</p>
+                <pre>
+                  <code>{EXAMPLES[selectedTopic].code}</code>
+                </pre>
+              </>
+            )}
           </div>
         </section>
       </main>
