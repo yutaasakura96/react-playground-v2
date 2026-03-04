@@ -1,0 +1,44 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules
+
+# Build outputs
+dist
+dist-ssr
+*.local
+
+# TypeScript cache and project files
+*.tsbuildinfo
+
+# React/Vite/CRA build output
+build/
+coverage/
+.cache/
+.tmp/
+vite.svg
+vite.config.ts
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Test coverage
+coverage/
+.nyc_output/
+# Jest snapshot
+*.snap
