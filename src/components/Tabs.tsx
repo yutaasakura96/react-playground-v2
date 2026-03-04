@@ -3,10 +3,10 @@ import type { HTMLAttributes, HTMLElementType } from 'react';
 interface TabsProps extends HTMLAttributes<HTMLMenuElement> {
   buttons: React.ReactNode;
   children: React.ReactNode;
-  ButtonsContainer: HTMLElementType;
+  ButtonsContainer?: HTMLElementType;
 }
 
-const Tabs = ({ children, buttons, ButtonsContainer }: TabsProps) => {
+const Tabs = ({ children, buttons, ButtonsContainer = 'menu' }: TabsProps) => {
   return (
     <>
       <ButtonsContainer>{buttons}</ButtonsContainer>
