@@ -7,7 +7,7 @@ interface PlayerProps {
 const Player = ({ name, symbol }: PlayerProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const handleEditClick = () => {
-    setIsEditing(!isEditing);
+    setIsEditing((editing) => !editing);
   };
 
   let playerName = <span className='player-name'>{name}</span>;
