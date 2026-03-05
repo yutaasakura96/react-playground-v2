@@ -7,13 +7,13 @@ interface PlayerProps {
 const Player = ({ name, symbol }: PlayerProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const handleEditClick = () => {
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   };
 
   let playerName = <span className='player-name'>{name}</span>;
 
   if (isEditing) {
-    playerName = <input className='player-name' type='text' required />;
+    playerName = <input className='player-name' type='text' required value={name} />;
   }
   return (
     <li>
