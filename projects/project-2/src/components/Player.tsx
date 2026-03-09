@@ -3,8 +3,9 @@ import { useState } from 'react';
 interface PlayerProps {
   initialName: string;
   symbol: string;
+  isActive: boolean;
 }
-const Player = ({ initialName, symbol }: PlayerProps) => {
+const Player = ({ initialName, symbol, isActive }: PlayerProps) => {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
   const handleEditClick = () => {
@@ -28,7 +29,7 @@ const Player = ({ initialName, symbol }: PlayerProps) => {
     );
   }
   return (
-    <li>
+    <li className={isActive ? 'active' : undefined}>
       <span className='player'>
         {editablePlayerName}
         <span className='player-symbol'>{symbol}</span>

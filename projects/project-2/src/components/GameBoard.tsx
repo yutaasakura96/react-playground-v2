@@ -2,22 +2,27 @@ import { useState } from 'react';
 
 type PlayerSymbol = 'X' | 'O';
 type GameBoardType = (PlayerSymbol | null)[][];
-
+interface GameBoardProps {
+  onSelectSquare: (activePlayer: string) => void;
+  activePlayerSymbol: PlayerSymbol;
+}
 const initialGameBoard: GameBoardType = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
-const GameBoard = () => {
+const GameBoard = ({ onSelectSquare, activePlayerSymbol }: GameBoardProps) => {
   const [gameBoard, setGameBoard] = useState<GameBoardType>(initialGameBoard);
 
   const handleSelectSquare = (rowIndex: number, colIndex: number) => {
     setGameBoard((prevGameBoard) => {
       const updatedBoard = prevGameBoard.map((innerArray) => [...innerArray]);
-      updatedBoard[rowIndex][colIndex] = 'X';
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
       return updatedBoard;
     });
+
+    onSelectSquare(activePlayerSymbol);
   };
 
   return (
