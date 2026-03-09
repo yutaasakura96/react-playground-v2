@@ -12,16 +12,21 @@ export type Turn = {
   player: PlayerSymbol;
 };
 
+const deriveActivePlayer = (gameTurns: Turn[]): PlayerSymbol => {
+  let currentPlayer: PlayerSymbol = 'X';
+  if (gameTurns.length > 0 && gameTurns[0].player === 'X') {
+    currentPlayer = 'O';
+  }
+  return currentPlayer;
+};
+
 const App = () => {
-  const [activePlayer, setActivePlayer] = useState<'X' | 'O'>('X');
   const [gameTurns, setGameTurns] = useState<Turn[]>([]);
+  const activePlayer = deriveActivePlayer(gameTurns);
+
   const handleSelectSquare = (rowIndex: number, colIndex: number) => {
-    setActivePlayer((curActivePlayer) => (curActivePlayer === 'X' ? 'O' : 'X'));
     setGameTurns((prevTurns) => {
-      let currentPlayer: 'X' | 'O' = 'X';
-      if (prevTurns.length > 0 && prevTurns[0].player === 'X') {
-        currentPlayer = 'O';
-      }
+      const currentPlayer = deriveActivePlayer(prevTurns);
       const updatedTurns: Turn[] = [
         { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
         ...prevTurns,
