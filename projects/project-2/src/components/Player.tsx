@@ -2,14 +2,18 @@ import { useState } from 'react';
 
 interface PlayerProps {
   initialName: string;
-  symbol: string;
+  symbol: 'X' | 'O';
   isActive: boolean;
+  onChangeName: (symbol: 'X' | 'O', newName: string) => void;
 }
-const Player = ({ initialName, symbol, isActive }: PlayerProps) => {
+const Player = ({ initialName, symbol, isActive, onChangeName }: PlayerProps) => {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
   const handleEditClick = () => {
     setIsEditing((editing) => !editing);
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerName(event.target.value);

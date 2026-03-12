@@ -218,6 +218,10 @@ ol {
   color: #e1dec7;
 }
 
+#game-over .winner-name {
+  text-transform: uppercase;
+}
+
 #game-over button {
   display: block;
   margin: 0 auto;
