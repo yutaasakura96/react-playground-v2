@@ -16,7 +16,12 @@ export type Turn = {
 
 export type GameBoardType = (PlayerSymbol | null)[][];
 
-const initialGameBoard: GameBoardType = [
+const PLAYERS = {
+  X: 'Player 1',
+  O: 'Player 2',
+};
+
+const INITIAL_GAME_BOARD: GameBoardType = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -29,22 +34,11 @@ const deriveActivePlayer = (gameTurns: Turn[]): PlayerSymbol => {
   }
   return currentPlayer;
 };
-const App = () => {
-  const [players, setPlayers] = useState({
-    X: 'Player 1',
-    O: 'Player 2',
-  });
-  const [gameTurns, setGameTurns] = useState<Turn[]>([]);
 
-  const activePlayer = deriveActivePlayer(gameTurns);
-
-  const gameBoard = [...initialGameBoard.map((array) => [...array])];
-  for (const turn of gameTurns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
-
+const deriveWinner = (
+  gameBoard: GameBoardType,
+  players: Record<PlayerSymbol, string>
+): string | null => {
   let winner = null;
 
   for (const combination of WINNING_COMBINATIONS) {
@@ -60,6 +54,27 @@ const App = () => {
       winner = players[firstSquareSymbol];
     }
   }
+  return winner;
+};
+
+const deriveGameBoard = (gameTurns: Turn[]): GameBoardType => {
+  const gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
+  for (const turn of gameTurns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+    gameBoard[row][col] = player;
+  }
+  return gameBoard;
+};
+const App = () => {
+  const [players, setPlayers] = useState(PLAYERS);
+  const [gameTurns, setGameTurns] = useState<Turn[]>([]);
+
+  const activePlayer = deriveActivePlayer(gameTurns);
+
+  const gameBoard = deriveGameBoard(gameTurns);
+
+  const winner = deriveWinner(gameBoard, players);
 
   const hasDraw = gameTurns.length === 9 && !winner;
   const handleSelectSquare = (rowIndex: number, colIndex: number) => {
@@ -91,13 +106,13 @@ const App = () => {
       <div id='game-container'>
         <ol id='players' className='highlight-player'>
           <Player
-            initialName='Player 1'
+            initialName={PLAYERS.X}
             symbol='X'
             isActive={activePlayer === 'X'}
             onChangeName={handlePlayerNameChange}
           />
           <Player
-            initialName='Player 2'
+            initialName={PLAYERS.O}
             symbol='O'
             isActive={activePlayer === 'O'}
             onChangeName={handlePlayerNameChange}
